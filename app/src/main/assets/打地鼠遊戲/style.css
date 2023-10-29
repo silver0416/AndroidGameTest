@@ -1,0 +1,81 @@
+body {
+    text-align: center;
+    font-family: "Microsoft JhengHei", sans-serif;    
+    justify-content: center;
+    width: auto;
+    height: auto;
+}
+
+h1 {
+    color: #333;
+}
+
+h2{
+    margin-bottom: auto;
+    font-size: 20px;
+}
+
+#game-instructions{
+  font-size: 20px;
+  padding: 3px;
+  margin-top:5px;
+  background-color:#336666; 
+  color: aliceblue;
+}
+
+#msg {
+    font-size: 16px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center; 
+    margin: 10px;
+}
+
+.hole {
+    width: 100px;
+    height: 100px;
+    background: url(yellow.jpg);
+    background-size: cover;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    border-radius: 20%; 
+    margin: auto;
+}
+
+#gameContainer {
+    display: grid;
+    grid-template-columns: repeat(3, 7em); 
+    grid-gap: 5px; 
+    margin: auto;
+    justify-content: center;
+    align-items: center;
+}
+
+.hole-container {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: 5px 5px;
+}
+
+#startButton {
+    margin-top: 15px;
+    font-size: 16px;
+    padding: 10px 20px;
+    background-color: #484891;
+    color: white;
+    border: none;
+    cursor: pointer;
+    display: inline-block;
+}
+
+#startButton:disabled {
+    background-color: #ccc;
+    cursor: not-allowed;
+}
+
+#showInstructionsButton{
+    font-size: 15px;
+}
