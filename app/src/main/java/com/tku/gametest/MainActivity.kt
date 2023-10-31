@@ -44,9 +44,13 @@ class MainActivity : ComponentActivity() {
             webView.reload()
         }
 
+        // todo 這裡可以傳遞token給網頁
+        val myParam = "我是token"
+
         buttonHome.setOnClickListener {
-            webView.loadUrl("https://appassets.androidplatform.net/assets/index.html")
+            webView.loadUrl("https://appassets.androidplatform.net/assets/index.html?param=$myParam")   //在原本的網址後方加上?param=$myParam
         }
+
 
         // WebView 資源載入
         val assetLoader = WebViewAssetLoader.Builder()
@@ -55,7 +59,7 @@ class MainActivity : ComponentActivity() {
             .build()
         webView.webViewClient = LocalContentWebViewClient(assetLoader)
 
-        webView.loadUrl("https://appassets.androidplatform.net/assets/index.html")
+        webView.loadUrl("https://appassets.androidplatform.net/assets/index.html?param=$myParam")
     }
 }
 
