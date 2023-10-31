@@ -3,6 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <audio id="goodMoleSound" src="good-mole-sound.mp3"></audio>
     <link rel="stylesheet" href="style.css">
     <title>打地鼠遊戲</title>
 </head>
@@ -62,7 +63,14 @@
             <div class="hole" id="hole9"></div>
        </div>   
     </div>
-    
+    <div id="popup" class="popup">
+        <div class="popup-content">
+        <h2>遊戲结束</h2>
+        <p>你的得分是: <span id="finalScore">0</span>分</p>
+        <button id="playAgainButton">再来一局</button>
+        </div>
+    </div>
+
     <button id="startButton">遊戲開始</button>
     <script src="script.js"></script>
 </body>

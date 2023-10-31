@@ -105,6 +105,7 @@ function submitGuess() {
         document.getElementById('result').innerHTML = `恭喜你猜對了！答案是 ${secretNumber}，總共猜了 ${attempts} 次。`;
         document.getElementById('submit').disabled = true;
         document.getElementById('restart-button').style.display = 'block';
+        playCorrectSound();
     } else {
         document.getElementById('result').innerHTML = `第 ${attempts} 次猜测：${guess} => ${a}A${b}B`;
         updateGuessHistory();
@@ -113,4 +114,35 @@ function submitGuess() {
     guessInput.value = '';
 }
 
+var rulesDiv = document.querySelector('.rules');
+var showRulesButton = document.getElementById('show-rules-button');
+var closeRulesButton = document.getElementById('close-rules-button');
 
+var rulesDiv = document.querySelector('.rules');
+var showRulesButton = document.getElementById('show-rules-button');
+
+showRulesButton.addEventListener('click', function () {
+    if (rulesDiv.style.display === 'block') {
+        rulesDiv.style.display = 'none';
+    } else {
+        rulesDiv.style.display = 'block';
+    }
+});
+
+rulesDiv.addEventListener('click', function (event) {
+    if (event.target === rulesDiv) {
+        rulesDiv.style.display = 'none';
+    }
+});
+
+document.getElementById('close-rules-button').addEventListener('click', function () {
+    rulesDiv.style.display = 'none';
+});
+
+
+
+
+function playCorrectSound() {
+    var audio = document.getElementById('correct-audio');
+    audio.play();
+}

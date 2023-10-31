@@ -8,6 +8,22 @@ let time = 60;
 let gameInterval;
 let gameStarted = false;
 
+function initializeGame() {
+    score = 0;
+    time = 60;
+    scoreValue.textContent = `得分：${score}分`;
+    timeValue.textContent = `時間：${time}秒`;
+    startButton.disabled = false;
+
+    holes.forEach(hole => {
+        hole.style.backgroundImage = 'url(yellow.jpg)';
+        hole.classList.remove('mole', 'rat');
+    });
+
+    const popup = document.getElementById('popup');
+    popup.style.display = 'none';
+}
+
 function startGame() {
     if (gameStarted) return;
     
@@ -35,14 +51,22 @@ function endGame() {
     startButton.disabled = false;
     gameStarted = false;
 
-    // Reset all holes to yellow
     holes.forEach(hole => {
         hole.style.backgroundImage = 'url(yellow.jpg)';
         hole.classList.remove('mole', 'rat');
     });
 
-    alert(`遊戲結束，得分：${score}分`);
+    const popup = document.getElementById('popup');
+    const finalScore = document.getElementById('finalScore');
+    popup.style.display = 'block';
+    finalScore.textContent = score;
 }
+
+
+const playAgainButton = document.getElementById('playAgainButton');
+playAgainButton.addEventListener('click', () => {
+    initializeGame();
+});
 
 function getRandomHole() {
     const index = Math.floor(Math.random() * holes.length);
@@ -69,12 +93,14 @@ function popMole(hole) {
 function whackMole(e) {
     if (!e.isTrusted) return;
     if (this.classList.contains('mole')) {
-        this.style.backgroundImage = 'url(green.png)';
+        this.style.backgroundImage = 'url(yellow.jpg)';
         this.classList.remove('mole');
         score += 2;
         scoreValue.textContent = `得分：${score}分`;
+        const goodMoleSound = document.getElementById('goodMoleSound');
+        goodMoleSound.play();
     } else if (this.classList.contains('rat')) {
-        this.style.backgroundImage = 'url(red.png)';
+        this.style.backgroundImage = 'url(yellow.jpg)';
         this.classList.remove('rat');
         time -= 5;
         if (time < 0) time = 0;
@@ -84,7 +110,6 @@ function whackMole(e) {
 
 holes.forEach(hole => hole.addEventListener('click', whackMole));
 startButton.addEventListener('click', startGame);
-
 const showInstructionsButton = document.getElementById("showInstructionsButton");
 const gameInstructions = document.getElementById("game-instructions");
 

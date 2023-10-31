@@ -7,6 +7,19 @@ h1 {
     color: 	#272727;
 }
 
+.rules {
+  font-size: 20px;
+  padding: 3px;
+  margin-top:5px;
+  background-color:	#CF9E9E; 
+  
+}
+
+.rules ul {
+    padding-left:auto;
+    text-align: left; 
+}
+
 #game-container {
     margin: 20px;
     padding: 20px;
@@ -46,4 +59,9 @@ h1 {
     border: none;
     border-radius: 5px;
     cursor: pointer;
+}
+
+#submit{
+    margin-top: 10px;
+    margin-bottom: 0px;
 }
