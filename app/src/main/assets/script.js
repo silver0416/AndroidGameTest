@@ -35,7 +35,6 @@ async function games() {
     return [
         "翻牌記憶小遊戲",
         "打地鼠遊戲",
-        "幾A幾B",
-        "數獨小遊戲"
+        "幾A幾B"
     ];
 }
