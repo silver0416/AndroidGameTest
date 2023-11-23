@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sudoku Game</title>
+    <style>
+        table {
+            border-collapse: collapse;
+            margin: 20px;
+        }
+        td {
+            width: 30px;
+            height: 30px;
+            text-align: center;
+            border: 1px solid #000;
+            cursor: pointer;
+        }
+        input {
+            width: 20px;
+            height: 20px;
+            text-align: center;
+        }
+        .error {
+            color: red;
+        }
+        #numberButtons {
+            margin-top: 20px;
+        }
+        .numberButton {
+            margin: 5px;
+            padding: 5px 10px;
+            cursor: pointer;
+            font-size: 16px;
+        }
+    </style>
+</head>
+<body>
+
+    <table id="sudokuTable"></table>
+    <div id="numberButtons"></div>
+
+    <script src="script.js"></script>
+</body>
+</html>
