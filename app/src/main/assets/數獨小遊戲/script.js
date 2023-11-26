@@ -1,9 +1,18 @@
 let win_flag = false;
-let diff = 0.2;
+let diff = 0.3;
 
 let startTime = new Date();
 let endTime;
 let timerInterval;
+
+
+// 使用 URLSearchParams 來解析 URL
+var urlParams = new URLSearchParams(window.location.search);
+// 使用 get 方法來獲得參數的值
+var paramValue = urlParams.get('param');
+// 使用 param1Value 進行相應的操作
+console.log(paramValue);
+
 
 document.addEventListener("DOMContentLoaded", function() {
     // startTimer();
@@ -224,6 +233,26 @@ function stopTimer() {
     return padZero(minutes) + ":" + padZero(seconds);
 }
 
+// 遊戲說明
+document.addEventListener("DOMContentLoaded", function() {
+    // 其他原有的 JavaScript 代碼
+
+    document.getElementById("instructionsButton").addEventListener("click", function() {
+        openInstructionsModal();
+    });
+});
+
+function openInstructionsModal() {
+    let modal = document.getElementById("game-info");
+    modal.style.display = "block";
+}
+
+function closeModal() {
+    let modal = document.getElementById("game-info");
+    modal.style.display = "none";
+}
+
+
 
 //
 function startGame() {
@@ -234,10 +263,10 @@ function startGame() {
     generateSudoku();
 
     // 隱藏開始遊戲按鈕
-    hideStartButton();
+    hideSudoku();
 
-    // 顯示提交按鈕
-    showSubmitButton();
+    // 顯示提交按鈕和盤面
+    showSudoku();
 
     startTimer();
     document.getElementById("submitButton").addEventListener("click", function() {
@@ -254,14 +283,18 @@ function resetTimer() {
     document.getElementById("timer").textContent = "00:00";
 }
 
-function hideStartButton() {
+function hideSudoku() {
     // 隱藏開始遊戲按鈕
     document.getElementById("startButton").style.display = "none";
+    // 隱藏開始遊戲按鈕
+    document.getElementById("instructionsButton").style.display = "none";
 }
 
-function showSubmitButton() {
+function showSudoku() {
     // 顯示提交按鈕
-    document.getElementById("submitButton").style.display = "block";
+    document.getElementById("submitButton").style.display = "inline-block";
+    // 顯示提交按鈕
+    document.getElementById("sudokuTable").style.display = "table";
 }
 
 function playAgain() {

@@ -3,6 +3,13 @@ let timerStarted = false;
 let timerInterval; 
 let seconds = 0;
 
+// 使用 URLSearchParams 來解析 URL
+var urlParams = new URLSearchParams(window.location.search);
+// 使用 get 方法來獲得參數的值
+var paramValue = urlParams.get('param');
+// 使用 param1Value 進行相應的操作
+console.log(paramValue);
+
 function startTimer() {
     timerInterval = setInterval(function() {
         seconds++;

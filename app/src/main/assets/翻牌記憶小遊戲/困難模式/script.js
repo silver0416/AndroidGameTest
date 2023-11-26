@@ -3,6 +3,18 @@ let timerStarted = false;
 let timerInterval; 
 let seconds = 0;
 
+// 使用 URLSearchParams 來解析 URL
+var urlParams = new URLSearchParams(window.location.search);
+// 使用 get 方法來獲得參數的值
+var paramValue = urlParams.get('param');
+// 使用 param1Value 進行相應的操作
+console.log(paramValue);
+
+// 獲取modal中的下一關連結元素
+var nextLevelLink = document.getElementById('btm').querySelector('a');
+// 設定下一關連結的href屬性
+nextLevelLink.href = "../%E8%B6%85%E9%9B%A3%E6%A8%A1%E5%BC%8F/index.html?param=" + encodeURIComponent(paramValue);
+
 function startTimer() {
     timerInterval = setInterval(function() {
         seconds++;
