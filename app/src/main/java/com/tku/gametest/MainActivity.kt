@@ -1,8 +1,11 @@
 package com.tku.gametest
 
 import android.annotation.SuppressLint
+import android.content.Context
 import android.net.Uri
 import android.os.Bundle
+import android.util.Log
+import android.webkit.JavascriptInterface
 import android.webkit.WebResourceRequest
 import android.webkit.WebResourceResponse
 import android.webkit.WebView
@@ -58,6 +61,7 @@ class MainActivity : ComponentActivity() {
             .addPathHandler("/res/", WebViewAssetLoader.ResourcesPathHandler(this))
             .build()
         webView.webViewClient = LocalContentWebViewClient(assetLoader)
+        webView.addJavascriptInterface(WebAppInterface(this), "AndroidInterface")
 
         webView.loadUrl("https://appassets.androidplatform.net/assets/index.html?param=$myParam")
     }
@@ -79,3 +83,13 @@ private class LocalContentWebViewClient(private val assetLoader: WebViewAssetLoa
         return assetLoader.shouldInterceptRequest(Uri.parse(url))
     }
 }
+
+class WebAppInterface(private val context: Context) {
+
+    @JavascriptInterface
+    fun processWebData(data: String) {
+        // 在這裡處理從 WebView 傳來的資料
+        Log.d("WebView", "Received data from web: $data")
+    }
+}
+
