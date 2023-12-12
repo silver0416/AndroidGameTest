@@ -1,3 +1,7 @@
+let userData = {
+    guessTimes: 0
+};
+
 var text = document.querySelector("#text");
 var count = document.querySelector("#count");
 var result = document.querySelector(".result");
@@ -10,11 +14,13 @@ var minRange = 1;
 var maxRange = 100;
 
 var guessNumber = Math.floor(Math.random() * (maxRange - minRange + 1)) + minRange;
-var sum = 0;
+userData.guessTimes = 0;
+
+sendDataToAndroid(userData);
 
 guessBu.onclick = function () {
-    sum++;
-    count.innerHTML = sum;
+    userData.guessTimes++;
+    count.innerHTML = userData.guessTimes;
     var userGuess = parseInt(text.value);
 
         if (isNaN(userGuess) || userGuess < 1 || userGuess >100)  {
@@ -42,6 +48,7 @@ guessBu.onclick = function () {
             result.style.color = "green";
             resultDisplay.innerHTML = "恭喜猜對了！";
             playCorrectGuessSound();
+            sendDataToAndroid(userData);
         }
     
 
@@ -54,9 +61,20 @@ reBu.onclick = function () {
     minRange = 1;
     maxRange = 100;
     guessNumber = Math.floor(Math.random() * (maxRange - minRange + 1)) + minRange;
-    sum = 0;
-    count.innerHTML = sum;
+    userData.guessTimes = 0;
+    count.innerHTML = userData.guessTimes;
+    count.innerHTML = userData.guessTimes;
     result.innerHTML = "";
     resultDisplay.innerHTML = "";
     text.value = "";
+    sendDataToAndroid(userData);
+}
+
+function sendDataToAndroid(data) {
+    console.log(data);
+    try{
+        AndroidInterface.processWebData(JSON.stringify(data));
+    }catch (e){
+       console.log(e);
+    }
 }

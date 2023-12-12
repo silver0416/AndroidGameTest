@@ -1,3 +1,7 @@
+let userData = {
+    guessTimes: 0
+};
+
 document.getElementById('guess').addEventListener('keydown', function (event) {
     if (event.key === 'Enter') {
         submitGuess();
@@ -17,17 +21,18 @@ function generateRandomNumber() {
 }
 
 let secretNumber = generateRandomNumber();
-let attempts = 0;
+userData.guessTimes = 0;
 const guessHistory = [];
 
 function restartGame() {
     secretNumber = generateRandomNumber();
-    attempts = 0;
+    userData.guessTimes = 0;
     guessHistory.length = 0;
     document.getElementById('submit').disabled = false;
     document.getElementById('result').innerHTML = '';
     document.getElementById('guess').value = '';
     updateGuessHistory();
+    sendDataToAndroid(userData);
 }
 
 document.getElementById('submit').addEventListener('click', function () {
@@ -49,15 +54,15 @@ document.getElementById('submit').addEventListener('click', function () {
         }
     }
 
-    attempts++;
+    userData.guessTimes++;
     guessHistory.push({ guess: guess, result: `${a}A${b}B` });
 
     if (a === 4) {
-        document.getElementById('result').innerHTML = `恭喜你猜對了！答案是${secretNumber}，總共猜了${attempts}次。`;
+        document.getElementById('result').innerHTML = `恭喜你猜對了！答案是${secretNumber}，總共猜了${userData.guessTimes}次。`;
         document.getElementById('submit').disabled = true;
         document.getElementById('restart-button').style.display = 'block';
     } else {
-        document.getElementById('result').innerHTML = `第 ${attempts} 次猜測：${guess} => ${a}A${b}B`;
+        document.getElementById('result').innerHTML = `第 ${userData.guessTimes} 次猜測：${guess} => ${a}A${b}B`;
         updateGuessHistory();
     }
 
@@ -98,16 +103,17 @@ function submitGuess() {
         }
     }
 
-    attempts++;
+    userData.guessTimes++;
     guessHistory.push({ guess: guess, result: `${a}A${b}B` });
 
     if (a === 4) {
-        document.getElementById('result').innerHTML = `恭喜你猜對了！答案是 ${secretNumber}，總共猜了 ${attempts} 次。`;
+        document.getElementById('result').innerHTML = `恭喜你猜對了！答案是 ${secretNumber}，總共猜了 ${userData.guessTimes} 次。`;
         document.getElementById('submit').disabled = true;
         document.getElementById('restart-button').style.display = 'block';
         playCorrectSound();
+        sendDataToAndroid(userData);
     } else {
-        document.getElementById('result').innerHTML = `第 ${attempts} 次猜测：${guess} => ${a}A${b}B`;
+        document.getElementById('result').innerHTML = `第 ${userData.guessTimes} 次猜测：${guess} => ${a}A${b}B`;
         updateGuessHistory();
     }
 
@@ -150,9 +156,21 @@ function hasDuplicateDigits(str) {
     for (let i = 0; i < str.length; i++) {
         for (let j = i + 1; j < str.length; j++) {
             if (str[i] === str[j]) {
-                return true; // Duplicates found
+                return true;
             }
         }
     }
     return false; 
 }
+
+function sendDataToAndroid(data) {
+    console.log(data);
+    try{
+        AndroidInterface.processWebData(JSON.stringify(data));
+    }catch (e){
+       console.log(e);
+    }
+}
+
+
+
