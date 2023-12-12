@@ -4,6 +4,7 @@ var result = document.querySelector(".result");
 var guessBu = document.querySelector("#guess");
 var reBu = document.querySelector("#reBu");
 var resultDisplay = document.querySelector("#result");
+var correctAudio = document.getElementById("correct-audio");
 
 var minRange = 1;
 var maxRange = 100;
@@ -20,25 +21,33 @@ guessBu.onclick = function () {
             result.innerHTML = "請輸入1-100的數字";
             result.style.color = "red";
             resultDisplay.innerHTML = "輸入錯誤！"; 
-        }
-        else if (userGuess > guessNumber) {
+        }else if (userGuess > guessNumber) {
             result.innerHTML = "猜大了！";
             result.style.color = "red";
+            if (userGuess <= maxRange) {
             maxRange = userGuess;
+            }
+
             resultDisplay.innerHTML = `${minRange}-${maxRange}`;
         } else if (userGuess < guessNumber) {
             result.innerHTML = "猜小了！";
             result.style.color = "red";
+            if (userGuess >= minRange) {
             minRange = userGuess;
+            }
             resultDisplay.innerHTML = `${minRange}-${maxRange}`;
         } else {
             result.className = "c2";
             result.innerHTML = "恭喜猜對了！";
             result.style.color = "green";
             resultDisplay.innerHTML = "恭喜猜對了！";
+            playCorrectGuessSound();
         }
     
 
+}
+function playCorrectGuessSound() {
+    correctAudio.play();
 }
 
 reBu.onclick = function () {

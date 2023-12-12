@@ -33,8 +33,8 @@ function restartGame() {
 document.getElementById('submit').addEventListener('click', function () {
     const guessInput = document.getElementById('guess');
     const guess = guessInput.value;
-    if (guess.length !== 4 || isNaN(guess)) {
-        alert('請輸入4位數字。');
+    if (guess.length !== 4 || isNaN(guess)|| hasDuplicateDigits(guess)) {
+        alert('請輸入4位不重複的數字。');
         return;
     }
 
@@ -145,4 +145,14 @@ document.getElementById('close-rules-button').addEventListener('click', function
 function playCorrectSound() {
     var audio = document.getElementById('correct-audio');
     audio.play();
+}
+function hasDuplicateDigits(str) {
+    for (let i = 0; i < str.length; i++) {
+        for (let j = i + 1; j < str.length; j++) {
+            if (str[i] === str[j]) {
+                return true; // Duplicates found
+            }
+        }
+    }
+    return false; 
 }
