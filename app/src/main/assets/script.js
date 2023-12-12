@@ -35,3 +35,9 @@ async function games() {
         "數獨小遊戲"
     ];
 }
+
+/*  send data into app  */
+// function sendDataToAndroid(data) {
+//     AndroidInterface.processWebData(data);
+// }
+// sendDataToAndroid("hello");
